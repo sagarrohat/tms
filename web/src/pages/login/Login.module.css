@@ -1,0 +1,28 @@
+.content {
+  width: 350px;
+}
+
+.button {
+  width: 100%;
+}
+
+.logo {
+  margin-bottom: 20px;
+  width: 118px;
+}
+
+.page {
+  min-height: 100vh;
+  background-color: #fbfafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media only screen and (max-width: 540px) {
+  .content {
+    width: 70%;
+  }
+}

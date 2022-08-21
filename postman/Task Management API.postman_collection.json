@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "582d6680-cc20-4176-a2a8-40ba1cd5194f",
+		"name": "Task Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "v1/tasks - filtering",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/v1/tasks?AssignedUserId=*",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "Keyword",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "AssignedUserId",
+									"value": "*"
+								},
+								{
+									"key": "From",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "To",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/tasks/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/v1/tasks/fbbff828-6855-470e-90f0-86d91ebe87bc",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"tasks",
+								"fbbff828-6855-470e-90f0-86d91ebe87bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/tasks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\" : \"Contact Customer via SMS\",\r\n    \"Description\" : null,\r\n    \"Priority\": {{Normal}},\r\n    \"AssignedUserId\": \"c67e42ce-fd6d-4b62-b0df-aaee8003902d\",\r\n    \"DueDate\": \"2022-08-21\",\r\n    \"PercentageCompleted\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1/tasks",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/tasks/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\" : \"Contact Customer via SMS\",\r\n    \"Description\" : null,\r\n    \"Status\": {{Completed}},\r\n    \"Priority\": {{High}},\r\n    \"AssignedUserId\": \"c67e42ce-fd6d-4b62-b0df-aaee8003902d\",\r\n    \"DueDate\": \"2022-08-21\",\r\n    \"PercentageCompleted\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1/tasks/fbbff828-6855-470e-90f0-86d91ebe87bc",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"tasks",
+								"fbbff828-6855-470e-90f0-86d91ebe87bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/tasks/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/v1/tasks/9e2e0d7f-68dc-4571-b84a-4a7fb389072a",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"tasks",
+								"9e2e0d7f-68dc-4571-b84a-4a7fb389072a"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{JwtSecret}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "v1/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/v1/users",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{JwtSecret}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "v1/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(responseCode.code === 200 && responseBody != null) {\r",
+									"    var responseJson = JSON.parse(responseBody);\r",
+									"    pm.environment.set(\"JwtSecret\", responseJson.Secret);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"EmailAddress\": \"rohat-sagar.urif-sonu@informatik.hs-fulda.de\",\r\n    \"Pd\": \"rohat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1/login",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "v1/dashboard/tasks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/v1/dashboard/tasks?AssignedUserId=*",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"dashboard",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "AssignedUserId",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{JwtSecret}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Pinned Task",
+			"item": [
+				{
+					"name": "v1/tasks/{id}/pinned",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/v1/tasks/f57cbb0b-3eb9-4a99-8d70-e9585c6a8453/pinned",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"tasks",
+								"f57cbb0b-3eb9-4a99-8d70-e9585c6a8453",
+								"pinned"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/tasks/{id}/pinned",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/v1/tasks/fbbff828-6855-470e-90f0-86d91ebe87bc/pinned",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"tasks",
+								"fbbff828-6855-470e-90f0-86d91ebe87bc",
+								"pinned"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{JwtSecret}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+.header {
+  background-color: #004a80 !important;
+}
+
+.logo {
+  width: 48px;
+}
+
+.navOptions {
+  justify-content: center;
+  float: right;
+}
+
+.userMenu {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 540px) {
+  .title {
+    display: none;
+  }
+}

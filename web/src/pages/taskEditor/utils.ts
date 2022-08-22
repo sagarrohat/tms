@@ -29,6 +29,8 @@ export function convertToFormFields(taskItem: TaskResponse) {
     } else if (taskItem.Priority === 3) {
       result.Priority = "High";
     }
+  } else {
+    result.Priority = "Normal";
   }
 
   return result;

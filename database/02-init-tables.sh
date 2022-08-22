@@ -1,11 +1,8 @@
 #!/bin/bash
 
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "systemdb" <<-EOSQL 
-	CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-	CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "tmsdb" <<-EOSQL 
 	CREATE TABLE public.users (
-		user_id        uuid        NOT NULL DEFAULT uuid_generate_v4(),
+		user_id        uuid        NOT NULL,
 		first_name     TEXT        NOT NULL,
 		last_name      TEXT        NOT NULL,
 		email_address  TEXT        NOT NULL UNIQUE,
@@ -15,13 +12,13 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "systemdb" <<-EOSQL
 	);
 
 	INSERT INTO public.users (user_id,first_name,last_name,email_address,pd,is_active) VALUES 
-	('cc78f65d-5289-428e-9bf6-c19953521f6a','Rohat','Sagar','rohat-sagar.urif-sonu@informatik.hs-fulda.de',PGP_SYM_ENCRYPT('rohat','q3t6w9zCFJNcRfUj'),true);
+	('cc78f65d-5289-428e-9bf6-c19953521f6a','Rohat','Sagar','rohat-sagar.urif-sonu@informatik.hs-fulda.de','fdcfd0eb2f18fcfc16229143939109aa09d33619797ab685cef7bdebf48c29e7',true);
 
 	INSERT INTO public.users (user_id,first_name,last_name,email_address,pd,is_active) VALUES 
-	('c67e42ce-fd6d-4b62-b0df-aaee8003902d','Nisha','Devi','nisha.devi@informatik.hs-fulda.de',PGP_SYM_ENCRYPT('nisha','q3t6w9zCFJNcRfUj'),true);
+	('c67e42ce-fd6d-4b62-b0df-aaee8003902d','Nisha','Devi','nisha.devi@informatik.hs-fulda.de','b89a61619bbc2a3d21afce76b35587f9ed796e30b873a83f6ab985f7a3522987',true);
 
 	CREATE TABLE public.tasks (
-		task_id                 uuid        NOT NULL DEFAULT uuid_generate_v4(),
+		task_id                 uuid        NOT NULL,
 		title                   TEXT        NOT NULL,
 		description             TEXT        NULL,
 		status                  INT         NOT NULL,
@@ -52,7 +49,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "systemdb" <<-EOSQL
 	);
 
 	CREATE TABLE public.notifications (
-		notification_id         uuid        NOT NULL DEFAULT uuid_generate_v4(),
+		notification_id         uuid        NOT NULL,
 		created_by              uuid        NOT NULL,
 		task_id                 uuid        NOT NULL,
 		user_id                 uuid        NOT NULL,

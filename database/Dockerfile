@@ -3,8 +3,9 @@ FROM postgres
 ENV POSTGRES_PASSWORD docker
 
 # The official postgres docker image will run .sql scripts found in the /docker-entrypoint-initdb.d/ folder.
-COPY 01-init-user-db.sh /docker-entrypoint-initdb.d/
+COPY 01-init-db.sh /docker-entrypoint-initdb.d/
 COPY 02-init-tables.sh /docker-entrypoint-initdb.d/
+COPY 03-init-user.sh /docker-entrypoint-initdb.d/
 
 #
 # Build an image from the Dockerfile and give it a name of 'tms-db' at current directory

@@ -18,8 +18,11 @@ A web application to manage and organize tasks. its intuitive and simple user in
 ## Screenshots
 
 ![App Screenshot](https://i.imgur.com/VzAwDhY.png)
+
 ![App Screenshot](https://i.imgur.com/STie0N8.png)
+
 ![App Screenshot](https://i.imgur.com/tSq8O6S.png)
+
 ![App Screenshot](https://i.imgur.com/Gq21A7i.png)
 
 ## Demo

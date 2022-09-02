@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  rabbitmq:
+    image: rabbitmq:3.10-management-alpine
+    container_name: 'tms-rabbitmq'
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - /root/tms/rabbitmq:/var/lib/rabbitmq/
+      - /root/tms/rabbitmq:/var/log/rabbitmq/
+  database:
+    image: postgres:14.1-alpine
+    container_name: 'tms-postgres'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /root/tms/db:/var/lib/postgresql/data

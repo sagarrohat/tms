@@ -417,6 +417,66 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "MessagingConfiguration",
+			"item": [
+				{
+					"name": "v1/messaging",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/v1/configuration/messaging?token=test",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"configuration",
+								"messaging"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{JwtSecret}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	]
 }

@@ -60,3 +60,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
+tms-firebase-admin-pk.json

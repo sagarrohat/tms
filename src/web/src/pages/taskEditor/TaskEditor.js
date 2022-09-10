@@ -1,15 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Form, Alert, Input, Button, Select, DatePicker, Slider } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { getAssignableUsers } from "../home/selectors";
 import { getItem, getApiError } from "./selectors";
 import { taskCreateOrUpdate } from "./actionCreators";
 import { AutoComplete } from "../../components";
-import {
-  convertToFormFields,
-  convertFromFormFields,
-  getAssignedUser,
-} from "./utils";
+import { convertToFormFields, convertFromFormFields } from "./utils";
 
 const { TextArea } = Input;
 
@@ -27,9 +23,6 @@ function TaskEditor(props) {
     assignableUsers = [...allUsers.slice(1, allUsers.length)];
   }
 
-  const [assignedUser, setAssignedUser] = useState(
-    getAssignedUser(taskItem, assignableUsers)
-  );
   const form = useRef(null);
 
   useEffect(() => {
@@ -37,16 +30,8 @@ function TaskEditor(props) {
     form.current.setFieldsValue(convertToFormFields(taskItem));
   }, [taskItem]);
 
-  const onAssignedUserChanged = (option) => {
-    setAssignedUser(option);
-  };
-
   const onFinish = (values) => {
-    let newValues = convertFromFormFields(
-      taskItem,
-      values,
-      assignedUser.UserId
-    );
+    let newValues = convertFromFormFields(taskItem, values);
     dispatch(taskCreateOrUpdate({ ...newValues }, false));
   };
 
@@ -93,13 +78,15 @@ function TaskEditor(props) {
         >
           <DatePicker />
         </Form.Item>
-        <Form.Item label="Assigned User">
+        <Form.Item
+          name="AssignedUserId"
+          valuePropName="defaultKey"
+          label="Assigned User"
+        >
           <AutoComplete
             keyFieldName="UserId"
             valueFieldName="FullName"
             options={assignableUsers}
-            defaultOption={assignedUser}
-            onChange={onAssignedUserChanged}
           />
         </Form.Item>
         <Form.Item name="PercentageCompleted" label="Completed %">

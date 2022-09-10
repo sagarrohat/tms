@@ -5,31 +5,40 @@ import styles from "./AutoComplete.module.scss";
 type Props = {
   keyFieldName: string;
   valueFieldName: string;
-  defaultOption: Object;
+  defaultKey: string;
   options: Array<any>;
   onChange?: Function;
 };
 
 function AutoComplete(props: Props) {
-  let options = [];
+  let mappedOptions = [];
   const {
-    options: initialOptions,
+    options,
     keyFieldName,
     valueFieldName,
-    defaultOption,
+    defaultKey,
     onChange,
     ...otherProps
   } = props;
-  if (initialOptions) {
-    options = initialOptions.map((element) => ({
+
+  if (options) {
+    mappedOptions = options.map((element) => ({
       key: element[keyFieldName],
       value: element[valueFieldName],
     }));
   }
 
+  const findByKey = (key: string) => {
+    return mappedOptions.find((e) => e.key == key);
+  };
+
+  const findByValue = (value: string) => {
+    return mappedOptions.find((e) => e.value == value);
+  };
+
   let defaultValue = null;
-  if (defaultOption !== undefined && defaultOption !== null) {
-    defaultValue = defaultOption[valueFieldName];
+  if (defaultKey !== undefined) {
+    defaultValue = findByKey(defaultKey)?.value;
   }
 
   const filterOption = (inputText: string, option: any) => {
@@ -37,15 +46,14 @@ function AutoComplete(props: Props) {
   };
 
   const onSelect = (value: string, option: any) => {
-    let selectedOption = initialOptions.find(
-      (element) => element[valueFieldName] == value
-    );
-    onChange(selectedOption);
+    let selectedOption = findByValue(value);
+
+    onChange(selectedOption.key);
   };
 
   return (
     <AntAutoComplete
-      options={options}
+      options={mappedOptions}
       defaultValue={defaultValue}
       className={styles.autoComplete}
       filterOption={filterOption}

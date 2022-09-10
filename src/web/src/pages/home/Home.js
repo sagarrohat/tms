@@ -27,10 +27,10 @@ function Home() {
 
   const assignableUsers = useSelector(getAssignableUsers);
   const activeTab = useSelector(getActiveTab);
-  const [user, setUser] = useState(useSelector(getUser));
+  const [userId, setUserId] = useState(useSelector(getUser).UserId);
 
-  const onUserChanged = (option) => {
-    setUser(option);
+  const onUserChanged = (selectedUserId) => {
+    setUserId(selectedUserId);
   };
 
   const onClose = () => {
@@ -44,11 +44,11 @@ function Home() {
   useEffect(() => {
     let payload = {
       filters: {
-        AssignedUserId: user.UserId,
+        AssignedUserId: userId,
       },
     };
     dispatch(userChanged(payload));
-  }, [user]);
+  }, [userId]);
 
   function tabChanged(key) {
     dispatch(toggleTab(key));
@@ -66,7 +66,7 @@ function Home() {
                 <AutoComplete
                   keyFieldName="UserId"
                   valueFieldName="FullName"
-                  defaultOption={user}
+                  defaultKey={userId}
                   options={assignableUsers}
                   onChange={onUserChanged}
                 />

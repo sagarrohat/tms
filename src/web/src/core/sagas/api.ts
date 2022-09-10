@@ -115,10 +115,11 @@ export function* executeApiCall(options: ApiOptions) {
       };
 
       yield put(
-        setLoginAlert(
-          "Something went wrong and I had to sign you out.  Please sign in again.",
-          "error"
-        )
+        setLoginAlert({
+          message:
+            "Something went wrong and I had to sign you out.  Please sign in again.",
+          type: "error",
+        })
       );
       yield put(logoutUser());
 

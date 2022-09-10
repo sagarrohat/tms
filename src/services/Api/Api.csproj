@@ -31,4 +31,10 @@
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Common\obj\Common.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Common\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Common\obj\project.packagespec.json" />
+  </ItemGroup>
+
 </Project>

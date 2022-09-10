@@ -7,6 +7,7 @@ import React from "react";
 require('dotenv').config()
 
 function App() {
+  // npx serve -s build
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

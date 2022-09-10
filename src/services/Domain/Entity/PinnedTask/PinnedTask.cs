@@ -2,6 +2,6 @@
 
 public class PinnedTask
 {
-    public Guid UserId { get; set; }
-    public Guid TaskId { get; set; }
+    public Guid UserId { get; init; }
+    public Guid TaskId { get; init; }
 }

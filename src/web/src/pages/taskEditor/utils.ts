@@ -1,17 +1,6 @@
 import moment from "moment";
 import { TaskResponse } from "../../core/types/task";
 
-export function getAssignedUser(taskItem: TaskResponse, assignableUsers: any) {
-  if (
-    taskItem?.AssignedUserId !== undefined &&
-    taskItem?.AssignedUserId !== null
-  ) {
-    return assignableUsers.find((x) => x.UserId === taskItem.AssignedUserId);
-  } else {
-    return assignableUsers.find((x) => x.UserId === null);
-  }
-}
-
 export function convertToFormFields(taskItem: TaskResponse) {
   let result: any = {
     DueDate: moment.utc(taskItem?.DueDate),
@@ -19,6 +8,7 @@ export function convertToFormFields(taskItem: TaskResponse) {
     PercentageCompleted: taskItem.PercentageCompleted,
     Description: taskItem.Description,
     Status: taskItem.Status,
+    AssignedUserId: taskItem.AssignedUserId,
   };
 
   if (taskItem?.Priority) {
@@ -36,11 +26,7 @@ export function convertToFormFields(taskItem: TaskResponse) {
   return result;
 }
 
-export function convertFromFormFields(
-  taskItem: TaskResponse,
-  values: any,
-  assignedUserId: string
-) {
+export function convertFromFormFields(taskItem: TaskResponse, values: any) {
   let priority = Number(values.Priority);
   if (isNaN(priority)) {
     if (values.Priority == "Low") {
@@ -57,7 +43,7 @@ export function convertFromFormFields(
     Description: values.Description,
     Status: taskItem.Status,
     Priority: priority,
-    AssignedUserId: assignedUserId,
+    AssignedUserId: values.AssignedUserId,
     DueDate: moment.utc(values.DueDate),
     PercentageCompleted: values.PercentageCompleted,
   };

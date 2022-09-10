@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { setMessagingToken } from "./actionCreators";
+import { addToast } from "../../core/features/toast/actionCreators";
 
 export function FirebaseNotifications() {
   const dispatch = useDispatch();
@@ -16,17 +17,17 @@ export function FirebaseNotifications() {
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
   };
 
+
+  let vapidKey = String(process.env.REACT_APP_FIREBASE_VAPID_KEY);
   const app = initializeApp(firebaseConfig);
   const messaging = getMessaging(app);
 
   const getMessagingToken = () => {
     return getToken(messaging, {
-      vapidKey:
-        "BFRdqBpc--50cWcz1-IQLFlccvh8--ul0g2UGBb2U4cxIBf5eJWqXWxLZQgvlAb1Q8vaAfPL-BkBYTHa4Djl-30",
+      vapidKey: vapidKey,
     })
       .then((currentToken) => {
         if (currentToken) {
-          console.log(currentToken);
           dispatch(setMessagingToken(currentToken));
         } else {
           // TODO: Show error message to user
@@ -38,8 +39,9 @@ export function FirebaseNotifications() {
   };
 
   onMessage(messaging, (payload) => {
-    console.log(payload);
     // Show this message
+    const { title, body } = payload.notification;
+    dispatch(addToast({ message: title + ": " + body, type: "info" }));
   });
 
   useEffect(() => {

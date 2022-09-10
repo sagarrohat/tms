@@ -20,8 +20,16 @@ public class NotificationBackgroundService : BackgroundService, INotificationBac
     {
         _notificationConsumer.Consume(async (result) =>
         {
-            var notificationProcessor = _notificationProcessorsFactory.Create(result.EntityType);
-            await notificationProcessor.ProcessAsync(result);
+            try
+            {
+                var notificationProcessor = _notificationProcessorsFactory.Create(result.EntityType);
+                await notificationProcessor.ProcessAsync(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
         });
 
         while (!stoppingToken.IsCancellationRequested)
